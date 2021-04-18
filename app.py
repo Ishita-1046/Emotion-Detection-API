@@ -11,7 +11,7 @@ app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 users = {
-    "Moody": generate_password_hash("M00dy")
+    "###": generate_password_hash("####")
 }
 
 @auth.verify_password
@@ -53,4 +53,4 @@ def predict():
 
 if '__name__'=='__main__':
 
-    app.run(debug=True)
+    app.run()
