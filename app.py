@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import pickle
 
 
 app = Flask(__name__)
@@ -20,7 +20,7 @@ def verify_password(username, password):
             check_password_hash(users.get(username), password):
         return username
 
-
+#model=pickle.loads(open('AI Models/CNN.pkl'))
 model = model_from_json(open("AI Models/Nik_model.json", "r").read())
 model.load_weights('AI Models/Nik_model.h5')
 
@@ -45,7 +45,7 @@ def predict():
         cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray, (48, 48)), -1), 0)
         prediction = model.predict(cropped_img)
         maxindex = int(np.argmax(prediction))
-        print(emotion_dict[maxindex])
+        #print(emotion_dict[maxindex])
 
     return jsonify({'emotion_detected':emotion_dict[maxindex]})
 
