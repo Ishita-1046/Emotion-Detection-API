@@ -8,6 +8,10 @@ app = Flask(__name__)
 model = model_from_json(open("AI Models/Nik_model.json", "r").read())
 model.load_weights('AI Models/Nik_model.h5')
 
+@app.route('/')
+def index():
+    return "<h1> Deployed to Heroku</h1>"
+
 @app.route('/predict',methods=['POST'])
 def predict():
 
