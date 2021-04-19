@@ -36,7 +36,7 @@ def predict():
     gray = cv2.cvtColor(img2, cv2.COLOR_RGB2GRAY)
 
     emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
-    facecasc = cv2.CascadeClassifier('venv/Lib/site-packages/cv2/data/haarcascade_frontalface_default.xml')
+    facecasc = cv2.CascadeClassifier('Static/haarcascade_frontalface_default.xml')
     faces = facecasc.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
 
     for (x, y, w, h) in faces:
