@@ -11,7 +11,7 @@ app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 users = {
-    "###": generate_password_hash("####")
+    "Moody": generate_password_hash("M00dy")
 }
 
 @auth.verify_password
