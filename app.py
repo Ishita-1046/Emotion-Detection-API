@@ -1,34 +1,15 @@
-from keras.models import load_model,model_from_json
+from keras.models import model_from_json,load_model
 from flask import Flask,request, jsonify
 import cv2
 import numpy as np
-from flask_httpauth import HTTPBasicAuth
-from werkzeug.security import generate_password_hash, check_password_hash
-
-
 
 app = Flask(__name__)
-auth = HTTPBasicAuth()
 
-users = {
-    "Moody": generate_password_hash("M00dy")
-}
-
-@auth.verify_password
-def verify_password(username, password):
-    if username in users and \
-            check_password_hash(users.get(username), password):
-        return username
-
-#model=pickle.loads(open('AI Models/CNN.pkl'))
 model = model_from_json(open("AI Models/Nik_model.json", "r").read())
 model.load_weights('AI Models/Nik_model.h5')
 
-
 @app.route('/predict',methods=['POST'])
-@auth.login_required
 def predict():
-
 
     img = request.files['image']
     img.save('Static/image.jpg')
